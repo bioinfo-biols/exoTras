@@ -1,0 +1,10 @@
+scanpy
+numpy
+pandas
+scipy
+statsmodels
+copysys
+os
+pickle
+multiprocessing
+gseapy
