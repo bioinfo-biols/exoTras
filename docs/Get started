@@ -1,0 +1,6 @@
+How to use exoTras?
+exoTras.exosomes_recognizer(input_path='directory_path', sample_file='sample_name', out_path='output_path', species='Homo')
+
+celltype_exosome_number, adata_exo, adata_combined = exoTras.source_tracker(adata_exo='exosomes_exoTras.h5ad', adata_cell='cells.h5ad', OBSsample='batch', OBScelltype='celltype')
+
+exo_activity_dat = exoTras.ESAI_celltype(adata_exo='exosomes_exoTras.h5ad', adata_cell='cells.h5ad', OBSsample='batch', OBScelltype='celltype')
