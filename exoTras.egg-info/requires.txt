@@ -2,7 +2,7 @@ scanpy
 numpy
 pandas
 scipy
-statsmodels.api
+statsmodels
 copysys
 os
 pickle

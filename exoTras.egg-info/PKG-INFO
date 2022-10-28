@@ -5,7 +5,7 @@ Summary: exosome-containing droplets identification and source tracking in scRNA
 Home-page: http://pypi.python.org/pypi/exoTras/
 Author: Ruiqiao He
 Author-email: ruiqiaohe@gmail.com
-License: UNKNOWN
+License: GPL
 Description: ## exoTras delineates exosome profiles at droplet resolution from single-cell transcriptomes
         exoTras /ˈɛkoʊˌtɹeɪs/ stands for <ins>exo</ins>some-containing droplets identification and source <ins>tra</ins>cking in <ins>s</ins>cRNA-seq data.
         
@@ -64,7 +64,7 @@ Description: ## exoTras delineates exosome profiles at droplet resolution from s
         
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
-Classifier: License :: OSI Approved :: GNU General Public License v3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
 Classifier: Programming Language :: Python :: 3.7
 Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
 Description-Content-Type: text/markdown
