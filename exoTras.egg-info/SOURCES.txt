@@ -1,8 +1,12 @@
 MANIFEST.in
 README.md
-exoTras_overview.png
 setup.py
 docs/Get started
+docs/Overview.md
+docs/conf.py
+docs/exoTras_overview.png
+docs/index.rst
+docs/requirements.txt
 exoTras/__init__.py
 exoTras/env.py
 exoTras/exosomes.gmt

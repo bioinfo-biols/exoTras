@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='exoTras',
-    version='0.1',
+    version='0.2',
     author='Ruiqiao He',
     author_email='ruiqiaohe@gmail.com',
     packages=['exoTras'],
@@ -12,18 +12,19 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=[
-        "scanpy",
-        "numpy",
-        "pandas",
-        "scipy",
-        "statsmodels",
+        "scanpy==1.6.0",
+        "numpy==1.21.5",
+        "pandas==1.1.2",
+        "scipy==1.5.4",
+        "statsmodels==0.12.1",
         "copy"
         "sys",
         "os",
-        "pickle",
         "multiprocessing",
-        "gseapy",
+        "pickle==4.0",
+        "gseapy>=0.10.4",
     ],
+    python_requires='==3.7',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',

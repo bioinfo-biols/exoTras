@@ -4,7 +4,7 @@ exoTras /ˈɛkoʊˌtɹeɪs/ stands for <ins>exo</ins>some-containing droplets id
 You can freely use exoTras to explore exosome heterogeneity at single droplet, characterize cell type dynamics in light of exosome activity and unlock diagnostic potential of exosomes in concert with cells.
 
 <p align="center">
-  <img src='exoTras_overview.png'>
+  <img src='./docs/exoTras_overview.png'>
 </p>
 <p align="center">
   Overview of exoTras.

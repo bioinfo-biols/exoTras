@@ -1,10 +1,10 @@
-scanpy
-numpy
-pandas
-scipy
-statsmodels
+scanpy==1.6.0
+numpy==1.21.5
+pandas==1.1.2
+scipy==1.5.4
+statsmodels==0.12.1
 copysys
 os
-pickle
 multiprocessing
-gseapy
+pickle==4.0
+gseapy>=0.10.4
