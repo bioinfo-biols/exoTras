@@ -1,6 +1,5 @@
 include README.md
-include exoTras_overview.png
-include docs/*
+include docs/exoTras_overview.png
 include exoTras/id_homo_rna_exo
 include exoTras/id_mus_rna_exo
 include exoTras/exosomes.gmt

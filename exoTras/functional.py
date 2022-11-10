@@ -9,8 +9,9 @@ import copy
 import sys
 import os
 import pickle
+from pathlib import Path
 
-def source_biogenesis(adata_cell, OBScelltype='celltype', Xraw = True, normalW=True):
+def source_biogenesis(adata_cell, OBScelltype='celltype', Xraw = True, normalW=True, species='Homo'):
     if Xraw:
         X_input = adata_cell.raw
     else:
@@ -24,13 +25,21 @@ def source_biogenesis(adata_cell, OBScelltype='celltype', Xraw = True, normalW=T
     gsea_pval = []
     num_clusters = len(adata_cell.obs[OBScelltype].cat.categories)
 
-    gmt_path = os.path.dirname(os.path.split(os.path.realpath(__file__))[0]) + '/exosomes.gmt'
+    if species == 'Homo':
+        gmt_path = Path(__file__).parent / 'exosomes.gmt'
+    
+    genesets_dict = {}
+    with open(gmt_path) as genesets:
+        genesets_dict = {
+            line.strip().split("\t")[0]: line.strip().split("\t")[2:]
+            for line in genesets.readlines()
+        }
 
     for i in range(num_clusters):
         i = adata_cell.obs[OBScelltype].cat.categories[i]
         gene_rank = pd.DataFrame({'exp': np.array(X_norm[adata_cell.obs[OBScelltype] == str(i), :].mean(axis=0))}, index = X_input.var_names)
 
-        res = gp.prerank(rnk=gene_rank, gene_sets=gmt_path)
+        res = gp.prerank(rnk=gene_rank, gene_sets=genesets_dict, outdir=None)
         terms = res.res2d.index
         gsea_pval.append([i, res.results[terms[0]]['nes'], res.results[terms[0]]['pval']])        
 
@@ -54,11 +63,15 @@ def near_neighbor(adata_combined, OBSsample='batch', OBSexo='exo', OBScelltype='
             near_neighbor.append([sample, i] + list(tse_ref.obs[OBScelltype].iloc[TheResult[1]]))#tmp_umap.obs['clusters'][i]] +
 
     near_neighbor_dat = pd.DataFrame(near_neighbor)
+    near_neighbor_dat.columns = [str(i) for i in near_neighbor_dat.columns.values]
     return(near_neighbor_dat)
 
-def preprocess_source(adata_exo, adata_cell, OBScelltype='celltype', OBSexo='exo'):
+def preprocess_source(adata_exo, adata_cell, OBScelltype='celltype', OBSexo='exo', Xraw=True):
     ## cell type
-    adata_cell_raw = copy.copy(adata_cell.raw.to_adata())
+    if Xraw:
+        adata_cell_raw = copy.copy(adata_cell.raw.to_adata())
+    else:
+        adata_cell_raw = copy.copy(adata_cell)
 
     adata_exo.obs[OBScelltype] = 'Exosomes'
     adata_exo.obs[OBScelltype] = pd.Series(adata_exo.obs[OBScelltype], dtype="category")
@@ -83,9 +96,9 @@ def preprocess_source(adata_exo, adata_cell, OBScelltype='celltype', OBSexo='exo
 
 def source_tracker(adata_exo, adata_cell, OBSsample='batch', OBScelltype='celltype', OBSexo='exo', OBSMpca='X_pca', cellN=10, Xraw = True, normalW=True):
 
-    adata_combined = preprocess_source(adata_exo, adata_cell, OBScelltype='celltype', OBSexo='exo')
-    gsea_pval_dat = source_biogenesis(adata_cell, OBScelltype='celltype', Xraw = True, normalW=True)
-    near_neighbor_dat = near_neighbor(adata_combined, OBSsample='batch', OBSexo='exo', OBScelltype='celltype', OBSMpca='X_pca', cellN=10)
+    adata_combined = preprocess_source(adata_exo, adata_cell, OBScelltype=OBScelltype, OBSexo=OBSexo, Xraw=Xraw)
+    gsea_pval_dat = source_biogenesis(adata_cell, OBScelltype=OBScelltype, Xraw = Xraw, normalW=normalW)
+    near_neighbor_dat = near_neighbor(adata_combined, OBSsample=OBSsample, OBSexo=OBSexo, OBScelltype=OBScelltype, OBSMpca=OBSMpca, cellN=cellN)
     
     near_neighbor_dat['times'] = ''
     near_neighbor_dat['type'] = ''
@@ -100,7 +113,7 @@ def source_tracker(adata_exo, adata_cell, OBSsample='batch', OBScelltype='cellty
     near_neighbor_dat.index = adata_exo.obs.index
     celltype_e_number = pd.DataFrame(near_neighbor_dat.type.value_counts())
 
-    adata_exo.obsm['source'] = near_neighbor_dat[[0, 1, 'type']]
+    adata_exo.obsm['source'] = near_neighbor_dat[['0', '1', 'type']]
     adata_exo.obsm['source'].columns = ['sample', 'i', 'type']
 
     return([celltype_e_number, adata_exo, adata_combined])

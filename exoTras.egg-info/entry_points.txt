@@ -1,3 +1,0 @@
-[console_scripts]
-exoTras = exoTras.main:exoTras_command
-
