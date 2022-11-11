@@ -1,4 +1,11 @@
+### Prerequisites
+exoTras requires python >= 3.7.
+
+    "numpy", "pandas", "scipy",
+    "scanpy", "statsmodels", "gseapy"
+
 ### Installation
+
 ```bash
 pip install exoTras
 ```
