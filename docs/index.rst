@@ -5,7 +5,7 @@ exoTras delineates exosome profiles at droplet resolution from single-cell trans
 
 You can freely use exoTras to explore exosome heterogeneity at single droplet, characterize cell type dynamics in light of exosome activity and unlock diagnostic potential of exosomes in concert with cells.
 
-.. image:: https://github.com/bioinfo-biols/exoTras/blob/main/docs/exoTras_overview.png
+.. image:: https://github.com/bioinfo-biols/exoTras/blob/main/docs/exoTras_overview.png?raw=True
    :width: 600px
 
 Key applications for exoTras

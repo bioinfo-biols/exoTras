@@ -1,5 +1,12 @@
 #### Installation
 
+##### Prerequisites
+exoTras requires python >= 3.7.
+
+    "numpy", "pandas", "scipy",
+    "scanpy", "statsmodels", "gseapy"
+
+##### Prerequisites
 ```bash
 pip install exoTras
 ```
@@ -9,10 +16,3 @@ conda create -y -n exoTras_env python=3.7
 conda activate exoTras_env
 pip install exoTras
 ```
-
-#### Prerequisites
-exoTras requires python >= 3.7.
-
-    "numpy", "pandas", "scipy",
-    "scanpy", "statsmodels", "gseapy"
-    
