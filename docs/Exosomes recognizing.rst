@@ -1,14 +1,25 @@
 Exosomes recognizing
 -------------
 
-Use test data in github `tests` as an example.
-For a study with multiple scRNA-seq samples, we support two input ways.
+Here, we used data in github `tests` directory as an example, and shown how exoTras recognizing exosomes in scRNA-seq datasets.
+We have generated test data in `h5ad` format in github, and exoTras also supports `10x_mtx` and `h5` data formats. Noted that the input droplet-gene matrix for exoTras should not be filtered; herein, the matrix should come from the *raw_feature_bc_matrix* directory in Cell Ranger *outs*\.
+
 .. code-block:: python
-    ### first    if samples locate in one directory
-    exoTras.exosomes_recognizer(input_path='directory_path', sample_file='sample_name', out_path='output_path', species='Homo')
-    ### second   if samples locate in differet directories
-    exoTras.exosomes_recognizer(sample_file='sample_path', out_path='output_path', species='Homo')
 
-In the first way, **directory_path** is the path for the directory that contains all sample; and **sample_name** is the file that list each sample in th directory row by row. Every sample should contain directory structure like *sample/outs/raw_feature_bc_matrix/*, and exoTras would automatically recognize for each sample. The second way supports one sample file with abosulte path for each sample, if they are not in one directory.
+    import scanpy as sc
+    import exoTras
+    exoTras.exosomes_recognizer(input_path='./tests', sample_file='./tests/sample_file', out_path='./tests')
 
+The first parameter was the path of directory that contains all samples. Because these test files exists in our `tests` directory, so we used `./tests`. The second parameter was the name of each sample in th directory row by row. If your data format is `10x_mtx`\, exoTras can automatically detect the directory of `sample/outs/raw_feature_bc_matrix/`\.
 And **out_path** defines the output of exoTras that is one h5ad file, named *raw_exoTras.h5ad*, with exoTras score and exosome classification in the *obs* for all droplets, and one named *exosomes_exoTras.h5ad* with only exosome-containing droplets.
+
+If samples locate in differet directories, we also supports another way to run exoTras.
+
+.. code-block:: python
+
+    import scanpy as sc
+    import exoTras
+    exoTras.exosomes_recognizer(sample_file='./tests/sample_file', out_path='./tests')
+
+Here, first parameter was the abosulte path of each sample row by row.
+

@@ -10,7 +10,7 @@ You can freely use exoTras to explore exosome heterogeneity at single droplet, c
     :width: 800px
 
 
-Key applications for exoTras
+Key applications of exoTras
 ----------------------------
 
 + recognize exosomes at single droplet resolution. 
